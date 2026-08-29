@@ -1,10 +1,21 @@
 import express from "express";
-import { getUsers,createUser,getUser } from "./User/UserController.js"; 
+import { getUsers,createUser,getUser } from "./User/UserController.js";
+import cors from "cors";  
 import connectDB from "./Database/dbConnection.js";
 
 connectDB();
 
 const app = express();
+
+app.use(cors(
+  {
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false,
+    optionsSuccessStatus: 200,
+  }
+));
+
 app.use(express.json());
 
 app.get("/", (req, res) => {
